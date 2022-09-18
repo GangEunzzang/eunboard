@@ -9,6 +9,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
+@ToString
+@Table(name = "member")
 @Entity
 public class Member {
 
@@ -17,14 +19,37 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    private String userId;
+    /** 학번 */
+    @Column(name = "student_id")
+    private String studentId;
 
-    private String userPassword;
+    /** 이메일 */
+    @Column(name = "email")
+    private String email;
 
-    private String nickname;
+    /** 비밀번호 */
+    @Column(name = "password")
+    private String password;
 
+    /** 이름 */
+    @Column(name = "name")
+    private String name;
+
+    /** 학과 */
+    @Column(name = "department")
+    private String department;
+
+    /** 연락처 */
+    @Column(name = "phone_number", length = 11)
+    private String phoneNumber;
+
+    /** 권한 */
     @Enumerated(EnumType.STRING)
-    private MemberRole memberRole;
+    private MemberRole auth;
+
+    /** 프로필 이미지*/
+    @Column(name = "profile_image")
+    private String profileImage;
 
 
 }

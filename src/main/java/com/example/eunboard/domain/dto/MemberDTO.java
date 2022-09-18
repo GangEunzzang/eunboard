@@ -1,10 +1,11 @@
 package com.example.eunboard.domain.dto;
 
 import com.example.eunboard.domain.entity.MemberRole;
-import lombok.Data;
-
-import java.io.Serializable;
 import lombok.*;
+
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Getter
 @Setter
@@ -12,11 +13,30 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @ToString
+public class MemberDTO {
 
-public class MemberDTO implements Serializable {
-    private Long id;
-    private String userId;
-    private String userPassword;
-    private String nickname;
-    private String memberRole;
+    /** 학번 */
+    private String studentId;
+
+    /** 이메일 */
+    private String email;
+
+    /** 비밀번호 */
+    private String password;
+
+    /** 이름 */
+    private String name;
+
+    /** 학과 */
+    private String department;
+
+    /** 연락처 */
+    private String phoneNumber;
+
+    /** 권한 */
+    private MemberRole auth;
+
+    /** 프로필 이미지*/
+    private String profileImage;
+
 }
