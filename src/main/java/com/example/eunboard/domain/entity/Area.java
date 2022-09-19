@@ -1,34 +1,16 @@
 package com.example.eunboard.domain.entity;
 
-import lombok.*;
-import org.springframework.context.annotation.Configuration;
-
-import javax.persistence.*;
+import lombok.Getter;
 
 @Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
-@ToString
-@Table(name = "area")
-@Entity
-public class Area {
+public enum Area {
+    INDONG("인동", 1), OOK("옥계", 2), GYUNGOON("경운대", 3), DAEGU("대구", 4);
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "area_id")
-    private Long id;
+    private String areaName;
+    private int areaCode;
 
-    /**  이름 */
-    @Column(name ="name")
-    private String name;
-
-    /**  출발지 */
-    @Column(name = "start_point")
-    private String startPoint;
-
-    /** 도착지 */
-    @Column(name = "end_point")
-    private String endPoint;
+    Area(String areaName, int areaCode) {
+        this.areaName = areaName;
+        this.areaCode = areaCode;
+    }
 }
