@@ -16,6 +16,7 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    /** TODO: 모든 인증로직 해제상태. 프로덕트레벨에서 관리필요 */
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors()
