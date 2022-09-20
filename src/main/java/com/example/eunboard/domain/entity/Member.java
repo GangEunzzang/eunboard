@@ -1,5 +1,6 @@
 package com.example.eunboard.domain.entity;
 
+import com.example.eunboard.domain.dto.request.MemberRequestDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -65,4 +66,6 @@ public class Member extends BaseEntity{
     /** 탈퇴일자 */
     @Column(name = "delete_date", length = 10)
     private Date deleteDate;
+
+
 }

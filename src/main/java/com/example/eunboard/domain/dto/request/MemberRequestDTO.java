@@ -1,11 +1,12 @@
-package com.example.eunboard.domain.dto;
+package com.example.eunboard.domain.dto.request;
 
+import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.MemberRole;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ import javax.persistence.Enumerated;
 @NoArgsConstructor
 @Builder
 @ToString
-public class MemberDTO {
+public class MemberRequestDTO {
 
     /** 학번 */
     private String studentId;
@@ -38,5 +39,13 @@ public class MemberDTO {
 
     /** 프로필 이미지*/
     private String profileImage;
+
+    /** 등교일 */
+    private List<String> memberTimeTable = new ArrayList<>();
+
+    public static Member toEntity (MemberRequestDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(dto, Member.class);
+    }
 
 }

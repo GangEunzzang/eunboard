@@ -1,4 +1,4 @@
-package com.example.eunboard.domain.dto;
+package com.example.eunboard.domain.dto.response;
 import lombok.*;
 
 @Getter
@@ -7,11 +7,13 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @ToString
-public class PassengerDTO {
+public class PassengerResponseDTO {
 
     private Long ticKetId;
 
     private String StudentId;
 
     private String passengerStudentId;
+
+
 }

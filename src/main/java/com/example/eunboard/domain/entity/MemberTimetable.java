@@ -25,7 +25,6 @@ public class MemberTimetable {
   @ToString.Exclude
   private Member member;
 
-  /** 요일코드 (0~6 일~토) */
-  @Column(columnDefinition = "TINYINT", length = 1, nullable = false)
-  private int dayCode;
+  @Column(name = "day_code", length = 1, nullable = false)
+  private String dayCode;
 }
