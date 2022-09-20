@@ -1,6 +1,6 @@
 package com.example.eunboard.domain.entity;
 
 public enum MemberRole {
-    D, P;
+    DRIVER, PASSENGER;
     // driver, passenger
 }

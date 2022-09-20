@@ -3,6 +3,7 @@ package com.example.eunboard.domain.entity;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -16,7 +17,7 @@ import org.hibernate.annotations.ColumnDefault;
 @ToString
 @Table(name = "member")
 @Entity
-public class Member {
+public class Member extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +50,7 @@ public class Member {
 
     /** 권한 */
     @Enumerated(EnumType.STRING)
+    @Column(length = 10)
     private MemberRole auth;
 
     /** 프로필 이미지 */
@@ -61,6 +63,6 @@ public class Member {
     private int isRemoved;
 
     /** 탈퇴일자 */
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
+    @Column(name = "delete_date", length = 10)
+    private Date deleteDate;
 }

@@ -1,6 +1,8 @@
 package com.example.eunboard.domain.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 
@@ -12,22 +14,25 @@ import javax.persistence.*;
 @ToString
 @Table(name = "passenger")
 @Entity
-public class Passenger {
+public class Passenger extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "passenger_id")
     private Long id;
 
+    /** 티켓 번호 */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id")
     @ToString.Exclude
     private Ticket ticket;
 
-    /** 드라이버 학번*/
-    @Column(name = "driver_student_id")
-    private String driverStudentId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    @ToString.Exclude
+    private Member member;
 
-    /**  탑승자 학번 */
-    @Column(name = "passenger_student_id")
-    private String passengerStudentId;
+    /** 취소 여부 */
+    @Column(name = "is_cancel", columnDefinition = "TINYINT(1)")
+    @ColumnDefault("0")
+    private Integer isCancel;
 }
