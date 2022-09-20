@@ -57,10 +57,16 @@ public class Ticket {
     @Column(name = "recruit_person", length = 1, columnDefinition = "TINYINT")
     private int recruitPerson;
 
+    /**
+     * 출발지 안동:1 옥계:2 경운대:3 대구:4
+     */
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "start_area", length = 1, columnDefinition = "TINYINT")
     private Area startArea;
 
+    /**
+     * 도착지 경운대:3
+     */
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "end_area", length = 1, columnDefinition = "TINYINT")
     private Area endArea;
