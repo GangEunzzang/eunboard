@@ -35,6 +35,8 @@ public class OAuthController {
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    // TODO: 토큰 리프레시
+
     @ResponseBody
     @GetMapping
     public ResponseEntity<?> kakaoLogin(@RequestParam String code) {

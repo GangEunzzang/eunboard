@@ -16,7 +16,7 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    /** TODO: 모든 인증로직 해제상태. 프로덕트레벨에서 관리필요 */
+    /** TODO: 프로덕트레벨에서 관리필요 */
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors()
@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers("/**")
+                .authorizeRequests().antMatchers("/kakaoLogin") // 카카오로그인만 접근허용되어있음
                 .permitAll()
                 .anyRequest().authenticated();
 
