@@ -34,6 +34,8 @@ public class MemberResponseDTO {
 
     private String profileImage;
 
+    private boolean isMember;
+
     public static MemberResponseDTO toDTO(Member entity) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(entity, MemberResponseDTO.class);

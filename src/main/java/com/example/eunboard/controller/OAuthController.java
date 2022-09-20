@@ -55,6 +55,7 @@ public class OAuthController {
                         .email(registeredMember.getEmail())
                         .id(registeredMember.getId())
                         .token(token)
+                        .isMember(registeredMember.getAuth() == null ? false : true)
                         .build();
 
                 return ResponseEntity.ok().body(responseMemberDTO);
