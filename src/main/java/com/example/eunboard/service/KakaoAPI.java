@@ -38,6 +38,7 @@ public class KakaoAPI {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
+            /** TODO: 카카오 키 하드코딩, 환경파일로 관리가 필요함 */
             // 파라미터 세팅
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("grant_type", "authorization_code");
