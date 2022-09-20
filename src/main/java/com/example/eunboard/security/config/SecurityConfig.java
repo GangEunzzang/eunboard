@@ -1,21 +1,38 @@
 package com.example.eunboard.security.config;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.filter.CorsFilter;
 
-@Configuration
-@EnableWebMvc
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+import com.example.eunboard.security.JwtAuthenticationFilter;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+@EnableWebSecurity
+public class SecurityConfig {
 
-        http.authorizeRequests()
-                .antMatchers("/").permitAll();
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Bean
+    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.cors()
+                .and()
+                .csrf().disable()
+                .httpBasic().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests().antMatchers("/**")
+                .permitAll()
+                .anyRequest().authenticated();
+
+        http.addFilterAfter(
+                jwtAuthenticationFilter,
+                CorsFilter.class);
+
+        return http.build();
     }
 
 }
