@@ -23,7 +23,7 @@ public class ReportBoardService {
     }
 
     //검색
-   /* public List<ReportBoard> findby(OrderSearch orderSearch) {
-        //return reportBoardRepository.findBy
+    /*public List<ReportBoard> findby(string orderSearch) {
+        return reportBoardRepository.findBy
     }*/
 }
