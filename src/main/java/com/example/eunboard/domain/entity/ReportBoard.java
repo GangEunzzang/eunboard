@@ -3,7 +3,6 @@ package com.example.eunboard.domain.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Getter
 @Setter
@@ -13,7 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 @Entity
 @Table(name = "report")
 @ToString
-public class Report {
+public class ReportBoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
