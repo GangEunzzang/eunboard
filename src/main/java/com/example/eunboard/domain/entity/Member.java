@@ -26,8 +26,8 @@ public class Member extends BaseEntity{
     private Long id;
 
     /** 학번 */
-    @Column(name = "student_id")
-    private String studentId;
+    @Column(name = "student_number")
+    private String studentNumber;
 
     /** 이메일 */
     @Column(name = "email")

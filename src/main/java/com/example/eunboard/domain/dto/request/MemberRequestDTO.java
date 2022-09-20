@@ -17,7 +17,7 @@ import java.util.List;
 public class MemberRequestDTO {
 
     /** 학번 */
-    private String studentId;
+    private String studentNumber;
 
     /** 이메일 */
     private String email;

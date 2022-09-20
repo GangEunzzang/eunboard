@@ -17,7 +17,7 @@ public class MemberResponseDTO {
 
     private Long id;
 
-    private String studentId;
+    private String studentNumber;
 
     private String memberName;
 
