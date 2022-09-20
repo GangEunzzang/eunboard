@@ -10,25 +10,30 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Entity
-@Table(name = "report")
+@Table(name = "question_board")
 @ToString
-public class QuestionBoard {
+public class QuestionBoard extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "report_id")
+    @Column(name = "question_board_id")
     private Long id;
 
-    /** 신고한 학번 */
+    /** 문의학번 */
     @Column(name = "writer_student_id")
     private String writerStudentId;
 
-    /** 신고받은 학번 */
-    @Column(name = "report_student_id")
-    private String reportStudentId;
+    /** 문의 email */
+    @Column(name = "writer_email")
+    private String writerEmail;
 
-    /** 신고 내용 */
+    /** 제목 */
+    @Column(name = "title")
+    private String title;
+
+    /** 내용 */
     @Column(name = "content")
     private String content;
+
 
 }

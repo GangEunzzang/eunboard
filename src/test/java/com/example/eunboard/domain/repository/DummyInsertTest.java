@@ -29,7 +29,7 @@ public class DummyInsertTest {
                     .department("학과" + i)
                     .password("비밀번호" + i)
                     .studentId("학번" + i)
-                    .name("이름 " + i)
+                    .memberName("이름 " + i)
                     .phoneNumber("휴대폰" + i)
                     .build();
 
