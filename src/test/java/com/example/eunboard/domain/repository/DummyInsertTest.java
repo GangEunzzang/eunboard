@@ -15,12 +15,12 @@ public class DummyInsertTest {
     private MemberRepository memberRepository;
 
     @Test
-    public void 회원_더미데이터_입력 () throws Exception {
-        //given
-        IntStream.rangeClosed(1,30).forEach(i -> {
+    public void 회원_더미데이터_입력() throws Exception {
+        // given
+        IntStream.rangeClosed(1, 30).forEach(i -> {
 
             MemberRole role = MemberRole.valueOf("P");
-            if(i <= 10) {
+            if (i <= 10) {
                 role = MemberRole.valueOf("D");
             }
             Member member = Member.builder()
@@ -28,7 +28,7 @@ public class DummyInsertTest {
                     .email("이메일" + i)
                     .department("학과" + i)
                     .password("비밀번호" + i)
-                    .studentId("학번" + i)
+                    .studentNumber("학번" + i)
                     .memberName("이름 " + i)
                     .phoneNumber("휴대폰" + i)
                     .build();
@@ -36,8 +36,8 @@ public class DummyInsertTest {
             memberRepository.save(member);
         });
 
-        //when
+        // when
 
-        //then
-     }
+        // then
+    }
 }
