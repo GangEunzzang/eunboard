@@ -2,10 +2,10 @@ package com.example.eunboard.domain.dto.response;
 
 import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.MemberRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 import org.modelmapper.ModelMapper;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -15,7 +15,12 @@ import java.util.Date;
 @ToString
 public class MemberResponseDTO {
 
+    private String token;
+
+    @JsonIgnore
     private Long id;
+
+    private String email;
 
     private String studentNumber;
 
