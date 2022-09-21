@@ -25,12 +25,10 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers("/kakaoLogin") // 카카오로그인만 접근허용되어있음
+                .authorizeRequests().antMatchers("/**") // 카카오로그인만 접근허용되어있음
                 .permitAll()
                 .anyRequest().authenticated();
 
-        http.authorizeRequests()
-                .antMatchers("/").permitAll();
 
         http.addFilterAfter(
                 jwtAuthenticationFilter,

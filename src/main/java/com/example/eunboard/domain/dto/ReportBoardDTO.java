@@ -1,11 +1,8 @@
 package com.example.eunboard.domain.dto;
 import com.example.eunboard.domain.entity.QuestionBoard;
 import com.example.eunboard.domain.entity.ReportBoard;
-import com.example.eunboard.domain.entity.Ticket;
 import lombok.*;
 import org.modelmapper.ModelMapper;
-
-import javax.persistence.Column;
 
 @Getter
 @Setter
@@ -13,7 +10,9 @@ import javax.persistence.Column;
 @NoArgsConstructor
 @Builder
 @ToString
-public class ReportDTO {
+public class ReportBoardDTO {
+
+    private Long id;
 
     private String writerStudentId;
 
@@ -21,22 +20,16 @@ public class ReportDTO {
 
     private String reportStudentId;
 
-    private String title;
-
     private String content;
 
-    public static ReportDTO toDTO(ReportBoard entity) {
+    public static ReportBoardDTO toDTO(ReportBoard entity) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(entity, ReportDTO.class);
+        return modelMapper.map(entity, ReportBoardDTO.class);
     }
 
-    public static ReportBoard toReportEntity(ReportDTO dto) {
+    public static ReportBoard toReportEntity(ReportBoardDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(dto, ReportBoard.class);
     }
 
-    public static QuestionBoard toQuestionEntity(ReportDTO dto) {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(dto, QuestionBoard.class);
-    }
 }

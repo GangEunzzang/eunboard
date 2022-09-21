@@ -42,7 +42,7 @@ public class KakaoAPI {
             // 파라미터 세팅
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("grant_type", "authorization_code");
-            map.add("client_id", "8763097c83420044eeea901b962072ab");
+            map.add("client_id", "235fc02960c0239e43b70d9e3fd2c9e6");
             map.add("client_secret", "QQP9e4kuegEA1ZQLUSDFINBknLcDoL8R");
             map.add("code", code);
 
