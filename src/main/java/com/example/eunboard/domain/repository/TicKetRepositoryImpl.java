@@ -18,7 +18,7 @@ public class TicKetRepositoryImpl implements TicketCustomRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Ticket> findAll() {
-        return queryFactory.select(ticket).from(ticket).fetch();
+    public List<Ticket> findByOrderByStartDtimeDesc() {
+        return queryFactory.select(ticket).from(ticket).orderBy(ticket.startDtime.desc()).fetch();
     }
 }

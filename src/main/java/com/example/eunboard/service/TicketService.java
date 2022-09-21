@@ -2,7 +2,6 @@ package com.example.eunboard.service;
 
 import com.example.eunboard.domain.dto.TicketDTO;
 import com.example.eunboard.domain.entity.Ticket;
-import com.example.eunboard.domain.repository.TicKetRepositoryImpl;
 import com.example.eunboard.domain.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,9 +25,7 @@ public class TicketService {
     }
 
     public List<TicketDTO> selectTicketList() {
-        List<TicketDTO> s = ticketRepository.findAll().stream().map(ticket -> TicketDTO.toDTO(ticket))
+        return ticketRepository.findByOrderByStartDtimeDesc().stream().map(ticket -> TicketDTO.toDTO(ticket))
                 .collect(Collectors.toList());
-        System.out.println(s);
-        return s;
     }
 }
