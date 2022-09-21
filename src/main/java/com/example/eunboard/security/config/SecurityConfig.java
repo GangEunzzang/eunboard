@@ -29,6 +29,9 @@ public class SecurityConfig {
                 .permitAll()
                 .anyRequest().authenticated();
 
+        http.authorizeRequests()
+                .antMatchers("/").permitAll();
+
         http.addFilterAfter(
                 jwtAuthenticationFilter,
                 CorsFilter.class);
