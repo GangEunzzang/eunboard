@@ -1,16 +1,26 @@
 package com.example.eunboard.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 
 @Getter
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Area {
-    INDONG("인동", 1), OOK("옥계", 2), GYUNGOON("경운대", 3), DAEGU("대구", 4);
+    INDONG("인동"), OOK("옥계"), GYUNGOON("경운대"), DAEGU("대구");
 
-    private String areaName;
-    private int areaCode;
+    final private String name;
 
-    Area(String areaName, int areaCode) {
-        this.areaName = areaName;
-        this.areaCode = areaCode;
+    private Area(String name) {
+        this.name = name;
+    }
+
+    public static Area nameOf(String name) {
+        for (Area status : Area.values()) {
+            if (status.getName().equals(name)) {
+                return status;
+            }
+        }
+        return null;
     }
 }

@@ -1,7 +1,5 @@
 package com.example.eunboard.domain.repository;
 
-
-import com.example.eunboard.domain.entity.QMember;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +13,6 @@ import static com.example.eunboard.domain.entity.QMember.member;
 public class MemberRepositoryImpl implements MemberCustomRepository {
 
     private final JPAQueryFactory queryFactory;
-
 
     @Override
     public Boolean memberExists(String email) {

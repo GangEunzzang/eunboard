@@ -22,7 +22,7 @@ public class TokenProvider {
         Instant.now().plus(1, ChronoUnit.DAYS));
     return Jwts.builder()
         .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
-        .setSubject(Long.toString(member.getId()))
+        .setSubject(Long.toString(member.getMemberId()))
         .setIssuer("carpool app")
         .setIssuedAt(new Date())
         .setExpiration(expiryDate).compact();

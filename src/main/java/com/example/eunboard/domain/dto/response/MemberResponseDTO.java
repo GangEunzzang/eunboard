@@ -1,10 +1,14 @@
 package com.example.eunboard.domain.dto.response;
 
+import com.example.eunboard.domain.entity.Area;
 import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.MemberRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.*;
+
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 
 @Getter
@@ -18,7 +22,7 @@ public class MemberResponseDTO {
     private String token;
 
     @JsonIgnore
-    private Long id;
+    private Long memberId;
 
     private String email;
 
@@ -35,6 +39,10 @@ public class MemberResponseDTO {
     private String profileImage;
 
     private boolean isMember;
+
+    private Area area;
+
+    private List<MemberTimetableResponseDTO> memberTimeTable;
 
     public static MemberResponseDTO toDTO(Member entity) {
         ModelMapper modelMapper = new ModelMapper();

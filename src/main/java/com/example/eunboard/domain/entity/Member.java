@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -18,12 +19,12 @@ import org.hibernate.annotations.ColumnDefault;
 @ToString
 @Table(name = "member")
 @Entity
-public class Member extends BaseEntity{
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
-    private Long id;
+    private Long memberId;
 
     /** 학번 */
     @Column(name = "student_number")
@@ -63,9 +64,20 @@ public class Member extends BaseEntity{
     @Column(name = "is_removed", columnDefinition = "TINYINT", length = 1)
     private int isRemoved;
 
+    /** 가입여부 */
+    @Column(name = "is_member", columnDefinition = "TINYINT", length = 1)
+    private boolean isMember;
+
     /** 탈퇴일자 */
     @Column(name = "delete_date", length = 10)
     private Date deleteDate;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_id")
+    private List<MemberTimetable> memberTimeTable;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "area", length = 2, columnDefinition = "CHAR")
+    private Area area;
 
 }

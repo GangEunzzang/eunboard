@@ -110,7 +110,7 @@ public class KakaoAPI {
             kakaoEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
 
             memberDTO.setEmail(kakaoEmail);
-            memberDTO.setName(kakaoNickName);
+            memberDTO.setMemberName(kakaoNickName);
             memberDTO.setPassword(Long.toString(kakaoId));
         } catch (Exception e) {
             log.warn("Kakao get account Fail. {}", e.getMessage());

@@ -1,5 +1,6 @@
 package com.example.eunboard.domain.dto.request;
 
+import com.example.eunboard.domain.entity.Area;
 import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.MemberRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,7 +20,7 @@ import java.util.List;
 public class MemberRequestDTO {
 
     @JsonIgnore
-    private long id;
+    private long memberId;
 
     /** 인증토큰 */
     @JsonIgnore
@@ -35,7 +36,7 @@ public class MemberRequestDTO {
     private String password;
 
     /** 이름 */
-    private String name;
+    private String memberName;
 
     /** 학과 */
     private String department;
@@ -49,8 +50,12 @@ public class MemberRequestDTO {
     /** 프로필 이미지 */
     private String profileImage;
 
+    private boolean isMember;
+
+    private Area area;
+
     /** 등교일 */
-    private List<String> memberTimeTable = new ArrayList<>();
+    private List<MemberTimetableRequestDTO> memberTimeTable;
 
     public static Member toEntity(MemberRequestDTO dto) {
         ModelMapper modelMapper = new ModelMapper();

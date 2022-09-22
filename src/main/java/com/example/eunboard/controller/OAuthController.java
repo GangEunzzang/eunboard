@@ -45,6 +45,7 @@ public class OAuthController {
             String accessToken = kakaoService.getAccessToken(code);
             MemberRequestDTO memberDTO = kakaoService.getUserInfo(accessToken);
             memberDTO.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
+            memberDTO.setMember(false);
 
             Member member = MemberRequestDTO.toEntity(memberDTO);
 
@@ -55,7 +56,7 @@ public class OAuthController {
 
                 final MemberResponseDTO responseMemberDTO = MemberResponseDTO.builder()
                         .email(registeredMember.getEmail())
-                        .id(registeredMember.getId())
+                        .memberId(registeredMember.getMemberId())
                         .token(token)
                         .isMember(registeredMember.getAuth() == null ? false : true)
                         .build();
