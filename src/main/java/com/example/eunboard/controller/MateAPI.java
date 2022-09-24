@@ -15,12 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MateAPI {
 
-    private final TicketService ticketService;
-
-    @PostMapping("/mate/api/test")
-    public void createTest(TicketDTO ticketDTO) {
-        ticketService.createTicket(ticketDTO);
-    }
 
     @GetMapping("/auth/test")
     public String authTest() {

@@ -1,5 +1,6 @@
 package com.example.eunboard.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,13 +27,14 @@ public class Ticket extends BaseEntity {
 
     /** 드라이버 정보 */
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "member_id")
     @ToString.Exclude
     private Member member;
 
-    /** 출발요일 및 시간 */
+    /** 출발일 및 시간 */
     @Column(name = "start_dtime")
-    private LocalDateTime startDtime;
+    private String startDtime;
 
     /** 오픈채팅방 링크 */
     @Column(name = "kakao_open_chat_url")
@@ -43,36 +45,32 @@ public class Ticket extends BaseEntity {
     private String kakaoOpenChatTitle;
 
     /** 티켓 비용 (0=무료) */
-    @ColumnDefault("0")
-    @Column(name = "ticket_price", length = 1, columnDefinition = "TINYINT")
-    private int ticketPrice;
+    @ColumnDefault("'0'")
+    @Column(name = "ticket_price", columnDefinition = "TINYINT(1)")
+    private String ticketPrice;
 
-    /** 티켓 상태 (-1:취소, 0:운행전, 1:운행중, 2:운행완료) */
-    @ColumnDefault("0")
-    @Column(name = "status", length = 1, columnDefinition = "TINYINT")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", length = 8)
+    private TicketStatus status;
 
     /** 탑승 인원 */
-    @ColumnDefault("0")
-    @Column(name = "recruit_person", length = 1, columnDefinition = "TINYINT")
-    private int recruitPerson;
+    @ColumnDefault("'0'")
+    @Column(name = "recruit_person", columnDefinition = "TINYINT(1)")
+    private String recruitPerson;
 
-    /**
-     * 출발지 안동:1 옥계:2 경운대:3 대구:4
-     */
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "start_area", length = 1, columnDefinition = "TINYINT")
-    private Area startArea;
+    /** 출발지 */
+    @Column(name = "start_area", length = 50)
+    private String startArea;
 
-    /**
-     * 도착지 경운대:3
-     */
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "end_area", length = 1, columnDefinition = "TINYINT")
-    private Area endArea;
+    /** 도착지 */
+    @Column(name = "end_area", length = 50)
+    private String endArea;
+
+
 
     /** 탑승자 연관관계 */
     @OneToMany(mappedBy = "ticket")
+    @JsonIgnore
     @ToString.Exclude
     private List<Passenger> passengerList = new ArrayList<>();
 

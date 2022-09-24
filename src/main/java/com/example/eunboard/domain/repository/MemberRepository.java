@@ -4,7 +4,7 @@ import com.example.eunboard.domain.entity.Member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MemberRepository extends JpaRepository<Member, Long>, MemberCustomRepository {
+public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Member findByMemberId(Long memberId);
 
