@@ -13,30 +13,31 @@ import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/ticket")
 @RestController
 public class TicketAPI {
 
   private final TicketService ticketService;
 
 
-  @PostMapping("/ticket/new")
+  @PostMapping("/new")
   public void ticketCreate(@RequestBody TicketRequestDTO requestDTO) {
     ticketService.save(requestDTO);
   }
 
   @ResponseBody
-  @GetMapping("/ticket/list")
+  @GetMapping("/list")
   public List<TicketResponseDTO> findAll() {
     return ticketService.findAll();
   }
 
   @ResponseBody
-  @GetMapping("/ticket/read/{id}")
+  @GetMapping("/read/{id}")
   public TicketResponseDTO read(@PathVariable long id) {
     return ticketService.read(id);
   }
 
-  @GetMapping("/ticket/delete/{id}")
+  @GetMapping("/delete/{id}")
   public void delete(@PathVariable long id) {
     ticketService.delete(id);
   }
