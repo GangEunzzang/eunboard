@@ -1,4 +1,4 @@
-package com.example.eunboard.exception.board;
+package com.example.eunboard.exception.custom;
 
 import com.example.eunboard.exception.ErrorCode;
 import lombok.Getter;

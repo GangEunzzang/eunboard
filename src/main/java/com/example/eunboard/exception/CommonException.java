@@ -1,6 +1,6 @@
 package com.example.eunboard.exception;
 
-import com.example.eunboard.exception.board.CustomException;
+import com.example.eunboard.exception.custom.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
