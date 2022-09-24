@@ -1,5 +1,7 @@
 package com.example.eunboard.domain.repository;
 
+import com.example.eunboard.domain.entity.QMember;
+import com.example.eunboard.domain.entity.QPassenger;
 import com.example.eunboard.domain.entity.Ticket;
 import com.example.eunboard.domain.entity.TicketStatus;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -11,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.example.eunboard.domain.entity.QMember.*;
+import static com.example.eunboard.domain.entity.QPassenger.*;
 import static com.example.eunboard.domain.entity.QTicket.ticket;
 
 @Transactional
@@ -25,6 +29,10 @@ public class TicketQueryRepository {
     public List<Ticket> findAll() {
         return queryFactory
                 .selectFrom(ticket)
+                .leftJoin(ticket.passengerList, passenger)
+                .fetchJoin()
+                .leftJoin(ticket.member, member)
+                .fetchJoin()
                 .where(ticket.status.eq(TicketStatus.AFTER).not())
                 .fetch();
     }

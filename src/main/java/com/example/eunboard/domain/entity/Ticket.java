@@ -66,8 +66,6 @@ public class Ticket extends BaseEntity {
     @Column(name = "end_area", length = 50)
     private String endArea;
 
-
-
     /** 탑승자 연관관계 */
     @OneToMany(mappedBy = "ticket")
     @JsonIgnore

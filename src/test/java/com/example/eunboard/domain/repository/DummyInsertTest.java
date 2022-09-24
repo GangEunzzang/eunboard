@@ -48,7 +48,6 @@ public class DummyInsertTest {
 
     @Test
     public void 티켓_더미데이터_입력 () throws Exception {
-
         //given
         IntStream.rangeClosed(1,30).forEach(i -> {
             Ticket ticket = Ticket.builder()

@@ -1,7 +1,5 @@
 package com.example.eunboard.controller;
 
-import com.example.eunboard.domain.dto.TicketDTO;
-import com.example.eunboard.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

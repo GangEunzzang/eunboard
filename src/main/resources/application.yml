@@ -49,4 +49,4 @@ spring:
         show_sql: true
 
 logging.level:
-  org.hibernate.SQL: debug
+  org.hibernate.SQL: error
