@@ -1,6 +1,6 @@
-package gang.study.crud.exception;
+package com.example.eunboard.exception;
 
-import gang.study.crud.exception.board.BoardException;
+import com.example.eunboard.exception.board.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +21,8 @@ public class CommonException {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("");
     }
 
-    @ExceptionHandler(BoardException.class)
-    public ResponseEntity<ErrorResponse> handleBoardException(BoardException e) {
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<ErrorResponse> handleBoardException(CustomException e) {
         ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }

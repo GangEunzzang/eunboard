@@ -23,6 +23,8 @@ import org.modelmapper.ModelMapper;
 @ToString
 public class TicketResponseDTO  {
 
+    private Long id;
+
     private String profileImage;
 
     private String startDtime;
@@ -45,6 +47,7 @@ public class TicketResponseDTO  {
 
     public static TicketResponseDTO toDTO(Ticket entity) {
         return TicketResponseDTO.builder()
+                .id(entity.getId())
                 .profileImage(entity.getMember().getProfileImage())
                 .startDtime(entity.getStartDtime())
                 .kakaoOpenChatTitle(entity.getKakaoOpenChatTitle())

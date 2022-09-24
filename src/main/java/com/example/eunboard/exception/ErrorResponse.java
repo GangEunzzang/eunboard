@@ -1,4 +1,4 @@
-package gang.study.crud.exception;
+package com.example.eunboard.exception;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -20,14 +20,24 @@ public class TicketAPI {
 
 
   @PostMapping("/ticket/new")
-  public void ticketCreate(@RequestBody TicketRequestDTO ticketRequestDTO) {
-    System.out.println("ticketRequestDTO : " + ticketRequestDTO);
-    ticketService.save(ticketRequestDTO);
+  public void ticketCreate(@RequestBody TicketRequestDTO requestDTO) {
+    ticketService.save(requestDTO);
   }
 
   @ResponseBody
   @GetMapping("/ticket/list")
-  public List<TicketResponseDTO> ticketList() {
-    return ticketService.listAll();
+  public List<TicketResponseDTO> findAll() {
+    return ticketService.findAll();
+  }
+
+  @ResponseBody
+  @GetMapping("/ticket/read/{id}")
+  public TicketResponseDTO read(@PathVariable long id) {
+    return ticketService.read(id);
+  }
+
+  @GetMapping("/ticket/delete/{id}")
+  public void delete(@PathVariable long id) {
+    ticketService.delete(id);
   }
 }
