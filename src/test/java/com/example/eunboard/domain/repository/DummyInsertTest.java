@@ -1,5 +1,6 @@
 package com.example.eunboard.domain.repository;
 
+import com.example.eunboard.domain.entity.Area;
 import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.MemberRole;
 import com.example.eunboard.domain.entity.Ticket;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Random;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -22,12 +24,12 @@ public class DummyInsertTest {
     @Test
     public void 회원_더미데이터_입력() throws Exception {
         // given
+
         IntStream.rangeClosed(1, 30).forEach(i -> {
 
-            MemberRole role = MemberRole.valueOf("PASSENGER");
-            if (i <= 10) {
-                role = MemberRole.valueOf("DRIVER");
-            }
+            MemberRole role = MemberRole.values()[new Random().nextInt(MemberRole.values().length)];
+            Area area = Area.values()[new Random().nextInt(Area.values().length)];
+
             Member member = Member.builder()
                     .auth(role)
                     .email("이메일" + i)
@@ -36,6 +38,7 @@ public class DummyInsertTest {
                     .studentNumber("학번" + i)
                     .memberName("이름 " + i)
                     .phoneNumber("휴대폰" + i)
+                    .area(area)
                     .build();
 
             memberRepository.save(member);
@@ -47,9 +50,16 @@ public class DummyInsertTest {
     }
 
     @Test
-    public void 티켓_더미데이터_입력 () throws Exception {
-        //given
-        IntStream.rangeClosed(1,30).forEach(i -> {
+    public void 티켓_더미데이터_입력() throws Exception {
+        // given
+        IntStream.rangeClosed(1, 30).forEach(i -> {
+            Area startArea = Area.values()[new Random().nextInt(Area.values().length)];
+            Area endArea = Area.values()[new Random().nextInt(Area.values().length)];
+
+            while (startArea.name().equals(endArea.name())) {
+                endArea = Area.values()[new Random().nextInt(Area.values().length)];
+            }
+
             Ticket ticket = Ticket.builder()
                     .member(Member.builder().memberId((long) i).build())
                     .startDtime("202209241530")
@@ -57,10 +67,10 @@ public class DummyInsertTest {
                     .kakaoOpenChatUrl("카카오 오픈채팅 링크" + i)
                     .ticketPrice("0")
                     .status(TicketStatus.BEFORE)
-                    .startArea("옥계")
-                    .endArea("경운대")
+                    .startArea(startArea)
+                    .endArea(endArea)
                     .build();
             ticketRepository.save(ticket);
         });
-     }
+    }
 }
