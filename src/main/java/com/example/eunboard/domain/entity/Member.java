@@ -1,9 +1,7 @@
 package com.example.eunboard.domain.entity;
 
-import com.example.eunboard.domain.dto.request.MemberRequestDTO;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -76,8 +74,8 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "member_id")
     private List<MemberTimetable> memberTimeTable;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "area", length = 2, columnDefinition = "CHAR")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "area", length = 8)
     private Area area;
 
 }

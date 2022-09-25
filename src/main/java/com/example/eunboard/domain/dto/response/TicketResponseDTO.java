@@ -1,19 +1,15 @@
 package com.example.eunboard.domain.dto.response;
 
-import com.example.eunboard.domain.entity.Member;
+import com.example.eunboard.domain.entity.Area;
 import com.example.eunboard.domain.entity.Passenger;
 import com.example.eunboard.domain.entity.Ticket;
 import com.example.eunboard.domain.entity.TicketStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.ToString;
-import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.*;
-import org.modelmapper.ModelMapper;
 
 @Getter
 @Setter
@@ -21,7 +17,7 @@ import org.modelmapper.ModelMapper;
 @NoArgsConstructor
 @Builder
 @ToString
-public class TicketResponseDTO  {
+public class TicketResponseDTO {
 
     private Long id;
 
@@ -39,9 +35,9 @@ public class TicketResponseDTO  {
 
     private String recruitPerson;
 
-    private String startArea;
+    private Area startArea;
 
-    private String endArea;
+    private Area endArea;
 
     private List<Passenger> passengerList = new ArrayList<>();
 

@@ -1,12 +1,10 @@
 package com.example.eunboard.domain.dto.request;
 
-import java.time.LocalDateTime;
-
+import com.example.eunboard.domain.entity.Area;
 import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.Ticket;
 import com.example.eunboard.domain.entity.TicketStatus;
 import lombok.*;
-import org.modelmapper.ModelMapper;
 
 @Getter
 @Setter
@@ -20,11 +18,11 @@ public class TicketRequestDTO {
 
     private Long memberId; // 멤버 일련번호
 
-    private String startArea;
+    private Area startArea;
 
     private TicketStatus status;
 
-    private String endArea;
+    private Area endArea;
 
     private String startDtime;
 
@@ -45,10 +43,9 @@ public class TicketRequestDTO {
                 .kakaoOpenChatUrl(dto.kakaoOpenChatUrl)
                 .recruitPerson(dto.recruitPerson)
                 .build();
-//        ModelMapper modelMapper = new ModelMapper();
+        // ModelMapper modelMapper = new ModelMapper();
 
-//        return modelMapper.map(dto, Ticket.class);
+        // return modelMapper.map(dto, Ticket.class);
     }
 
 }
-
