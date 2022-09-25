@@ -1,5 +1,6 @@
 package com.example.eunboard.domain.dto.response;
 
+import com.example.eunboard.domain.entity.MemberTimetable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -24,4 +25,11 @@ public class MemberTimetableResponseDTO {
 
   @JsonIgnore
   private Long memberTimetableId;
+
+  public static MemberTimetableResponseDTO toDTO(MemberTimetable entity) {
+    return MemberTimetableResponseDTO.builder()
+        .dayCode(entity.getDayCode())
+        .build();
+  }
+
 }

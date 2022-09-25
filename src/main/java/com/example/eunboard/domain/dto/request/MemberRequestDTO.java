@@ -6,10 +6,9 @@ import com.example.eunboard.domain.entity.MemberRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.*;
-import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -57,9 +56,28 @@ public class MemberRequestDTO {
     /** 등교일 */
     private List<MemberTimetableRequestDTO> memberTimeTable;
 
+    public static Member toKakaoEntity(MemberRequestDTO dto) {
+        return Member.builder()
+                .memberName(dto.memberName)
+                .email(dto.email)
+                .password(dto.password)
+                .build();
+    }
+
     public static Member toEntity(MemberRequestDTO dto) {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(dto, Member.class);
+        return Member.builder()
+                .memberTimeTableList(dto.memberTimeTable.stream().map(MemberTimetableRequestDTO::toEntity)
+                        .collect(Collectors.toList()))
+                .memberId(dto.memberId)
+                .studentNumber(dto.studentNumber)
+                .email(dto.email)
+                .memberName(dto.memberName)
+                .department(dto.department)
+                .phoneNumber(dto.phoneNumber)
+                .auth(dto.auth)
+                .profileImage(dto.profileImage)
+                .area(dto.area)
+                .build();
     }
 
 }

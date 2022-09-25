@@ -7,9 +7,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import org.modelmapper.ModelMapper;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -42,10 +42,32 @@ public class MemberResponseDTO {
 
     private Area area;
 
-    private List<MemberTimetableResponseDTO> memberTimeTable;
+    private List<MemberTimetableResponseDTO> memberTimeTable = new ArrayList<>();
 
-    public static MemberResponseDTO toDTO(Member entity) {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(entity, MemberResponseDTO.class);
+    public static MemberResponseDTO toKakaoDTO(Member entity, String token) {
+        return MemberResponseDTO.builder()
+                .token(token)
+                .memberName(entity.getMemberName())
+                .isMember(entity.isUseMember())
+                .email(entity.getEmail())
+                .build();
+    }
+
+    public static MemberResponseDTO toDTO(Member entity, String token) {
+        return MemberResponseDTO.builder()
+                .token(token)
+                .memberId(entity.getMemberId())
+                .email(entity.getEmail())
+                .studentNumber(entity.getStudentNumber())
+                .memberName(entity.getMemberName())
+                .department(entity.getDepartment())
+                .phoneNumber(entity.getPhoneNumber())
+                .auth(entity.getAuth())
+                .profileImage(entity.getProfileImage())
+                .isMember(entity.isUseMember())
+                .area(entity.getArea())
+                .memberTimeTable(entity.getMemberTimeTableList().stream().map(MemberTimetableResponseDTO::toDTO)
+                        .collect(Collectors.toList()))
+                .build();
     }
 }

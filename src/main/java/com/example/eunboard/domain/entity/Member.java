@@ -2,6 +2,7 @@ package com.example.eunboard.domain.entity;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -57,22 +58,23 @@ public class Member extends BaseEntity {
     @Column(name = "profile_image")
     private String profileImage;
 
+    /** 가입여부 */
+    @ColumnDefault("0")
+    @Column(name = "is_member", columnDefinition = "TINYINT", length = 1)
+    private boolean isUseMember;
+
     /** 탈퇴여부 */
     @ColumnDefault("0")
     @Column(name = "is_removed", columnDefinition = "TINYINT", length = 1)
     private int isRemoved;
 
-    /** 가입여부 */
-    @Column(name = "is_member", columnDefinition = "TINYINT", length = 1)
-    private boolean isMember;
-
     /** 탈퇴일자 */
     @Column(name = "delete_date", length = 10)
     private Date deleteDate;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
-    private List<MemberTimetable> memberTimeTable;
+    @OneToMany(mappedBy = "member")
+    @ToString.Exclude
+    private List<MemberTimetable> memberTimeTableList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "area", length = 8)

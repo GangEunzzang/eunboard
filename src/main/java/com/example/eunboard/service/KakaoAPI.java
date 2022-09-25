@@ -4,6 +4,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -24,10 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class KakaoAPI {
 
-    // String redirectUri =
-    // URLEncoder.encode("redirect_uri=http://3.37.159.244:8080/kakaoLogin",
-    // "UTF-8");
-    // sb.append("&client_id=235fc02960c0239e43b70d9e3fd2c9e6");
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public String getAccessToken(String code) {
         String access_Token = "";
@@ -111,7 +110,8 @@ public class KakaoAPI {
 
             memberDTO.setEmail(kakaoEmail);
             memberDTO.setMemberName(kakaoNickName);
-            memberDTO.setPassword(Long.toString(kakaoId));
+            memberDTO.setPassword(passwordEncoder.encode(Long.toString(kakaoId)));
+            memberDTO.setMember(false);
         } catch (Exception e) {
             log.warn("Kakao get account Fail. {}", e.getMessage());
             throw new RuntimeException("Kakao get account Fail.");
