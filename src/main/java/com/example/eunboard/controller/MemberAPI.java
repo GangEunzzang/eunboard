@@ -54,7 +54,7 @@ public class MemberAPI {
             String newFileName = new MD5Generator(originName).toString() + "." + ext;
             FileUploadUtils.saveFile("/image/profiles/" + memberId, newFileName, multipartFile);
 
-            memberService.updateProfileImage(memberId, newFileName);
+            memberService.updateProfileImage(memberId, "/image/profiles/" + memberId + "/" + newFileName);
         }
 
         memberTimetableService.saveAll(memberId, requestDTO.getMemberTimeTable());
