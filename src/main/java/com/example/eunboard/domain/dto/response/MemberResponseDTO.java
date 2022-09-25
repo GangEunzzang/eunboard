@@ -48,7 +48,7 @@ public class MemberResponseDTO {
         return MemberResponseDTO.builder()
                 .token(token)
                 .memberName(entity.getMemberName())
-                .isMember(entity.isUseMember())
+                .isMember(entity.isMember())
                 .email(entity.getEmail())
                 .build();
     }
@@ -64,7 +64,7 @@ public class MemberResponseDTO {
                 .phoneNumber(entity.getPhoneNumber())
                 .auth(entity.getAuth())
                 .profileImage(entity.getProfileImage())
-                .isMember(entity.isUseMember())
+                .isMember(entity.isMember())
                 .area(entity.getArea())
                 .memberTimeTable(entity.getMemberTimeTableList().stream().map(MemberTimetableResponseDTO::toDTO)
                         .collect(Collectors.toList()))

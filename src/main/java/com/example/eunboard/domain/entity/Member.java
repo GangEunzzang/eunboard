@@ -61,7 +61,7 @@ public class Member extends BaseEntity {
     /** 가입여부 */
     @ColumnDefault("0")
     @Column(name = "is_member", columnDefinition = "TINYINT", length = 1)
-    private boolean isUseMember;
+    private boolean isMember;
 
     /** 탈퇴여부 */
     @ColumnDefault("0")
