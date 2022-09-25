@@ -22,20 +22,24 @@
 #    spring.redis.host=localhost
 #    spring.redis.port=6379
 
-
 server:
   port: 8080
+  tomcat:
+    max-http-form-post-size: 25MB
 
 spring:
+  servlet:
+    max-file-size: 20MB
+    max-request-size: 25MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mate
     username: root
     password: 12345678
-#    url: jdbc:mariadb://localhost:3306/mydb
-#    username: kunilAWS
-#    password: sp6356
-#    driver-class-name: org.mariadb.jdbc.Driver
+  #    url: jdbc:mariadb://localhost:3306/mydb
+  #    username: kunilAWS
+  #    password: sp6356
+  #    driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
