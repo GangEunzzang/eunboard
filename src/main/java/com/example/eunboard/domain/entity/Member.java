@@ -72,7 +72,7 @@ public class Member extends BaseEntity {
     @Column(name = "delete_date", length = 10)
     private Date deleteDate;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")
     private List<MemberTimetable> memberTimeTable;
 

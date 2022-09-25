@@ -2,11 +2,11 @@ package com.example.eunboard.domain.repository;
 
 import com.example.eunboard.domain.entity.Ticket;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TicketRepository extends JpaRepository<Ticket, Long>, TicketCustomRepository {
+public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
-  List<Ticket> findByOrderByStartDtimeDesc();
+
 }

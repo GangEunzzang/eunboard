@@ -1,47 +1,44 @@
 package com.example.eunboard.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.eunboard.domain.dto.request.TicketRequestDTO;
+import com.example.eunboard.domain.dto.response.TicketResponseDTO;
+import org.springframework.web.bind.annotation.*;
 
-import com.example.eunboard.domain.dto.TicketDTO;
-import com.example.eunboard.domain.dto.response.BaseResponseDTO;
 import com.example.eunboard.service.TicketService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/ticket")
 @RestController
 public class TicketAPI {
 
   private final TicketService ticketService;
 
-  @ResponseBody
-  @GetMapping("/ticket")
-  public ResponseEntity<?> getTicketList(@AuthenticationPrincipal Long memberId) {
-    try {
-      BaseResponseDTO<TicketDTO> responseDTO = BaseResponseDTO.<TicketDTO>builder()
-          .data(ticketService.selectTicketList()).build();
-      return ResponseEntity.ok().body(responseDTO);
-    } catch (Exception e) {
-      BaseResponseDTO<TicketDTO> responseDTO = BaseResponseDTO.<TicketDTO>builder().error(e.getMessage()).build();
-      return ResponseEntity.badRequest().body(responseDTO);
-    }
+
+  @PostMapping("/new")
+  public void ticketCreate(@RequestBody TicketRequestDTO requestDTO) {
+    ticketService.save(requestDTO);
   }
 
   @ResponseBody
-  @PostMapping("/ticket/new")
-  public String ticketCreate(@AuthenticationPrincipal Long memberId,
-      TicketDTO ticketDTO) {
+  @GetMapping("/list")
+  public List<TicketResponseDTO> findAll() {
+    return ticketService.findAll();
+  }
 
-    System.out.println("요청자 아이디 : " + memberId);
-    System.out.println("ticketDTO : " + ticketDTO);
+  @ResponseBody
+  @GetMapping("/read/{id}")
+  public TicketResponseDTO read(@PathVariable long id) {
+    return ticketService.read(id);
+  }
 
-    return "티켓생성";
+  @GetMapping("/delete/{id}")
+  public void delete(@PathVariable long id) {
+    ticketService.delete(id);
   }
 }
