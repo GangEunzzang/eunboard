@@ -2,13 +2,18 @@ package com.example.eunboard.controller;
 
 import com.example.eunboard.domain.dto.QuestionBoardDTO;
 import com.example.eunboard.domain.dto.ReportBoardDTO;
+import com.example.eunboard.domain.dto.request.MemberRequestDTO;
+import com.example.eunboard.domain.dto.response.MemberResponseDTO;
+import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.QuestionBoard;
+import com.example.eunboard.service.MemberService;
 import com.example.eunboard.service.QuestionBoardService;
 import com.example.eunboard.service.ReportBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -20,11 +25,12 @@ import java.util.List;
 @RestController
 public class ReportController {
 
-    @Autowired
-    private ReportBoardService reportBoardService;
-    @Autowired
-    private QuestionBoardService questionBoardService;
 
+    private final ReportBoardService reportBoardService;
+
+    private final QuestionBoardService questionBoardService;
+
+    private final MemberService memberService;
 
     @GetMapping("/ReportBoard")
     public String createReportForm() {
@@ -47,21 +53,23 @@ public class ReportController {
     }
 
     @GetMapping("/QuestionBoard")
-    public ResponseEntity<?> createQuestionForm(@RequestBody HashMap<String, Object> param) {
-        List<QuestionBoard> Boards = questionBoardService.findByEmail(param.get("writerEmail").toString());
+    public ResponseEntity<?> createQuestionForm(@AuthenticationPrincipal long memberId ) {
+        MemberResponseDTO member= memberService.select(memberId);
+        List<QuestionBoard> Boards = questionBoardService.findByEmail(member.getEmail());
         return ResponseEntity.ok().body(Boards);
     }
 
     @PostMapping("/QuestionBoard/new")
-    public String createQuestion(@RequestBody HashMap<String, Object> param) {
-        QuestionBoardDTO dto =new QuestionBoardDTO();
+    public String createQuestion(@AuthenticationPrincipal long memberId,
+                                 @RequestBody QuestionBoardDTO requestDTO) {
+        /*QuestionBoardDTO dto =new QuestionBoardDTO();
         dto.setWriterStudentId(param.get("writerStudentId").toString());
         dto.setWriterEmail(param.get("writerEmail").toString());
         //reportDTO.setReportStudentId(".");
         dto.setTitle(param.get("title").toString());
-        dto.setContent(param.get("content").toString());
+        dto.setContent(param.get("content").toString());*/
 
-        questionBoardService.createQuestionBoard(dto);
+        questionBoardService.createQuestionBoard(requestDTO);
 
         return "save ok";
     }
