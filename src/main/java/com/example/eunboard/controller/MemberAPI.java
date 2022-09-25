@@ -4,9 +4,10 @@ import com.example.eunboard.domain.dto.request.MemberRequestDTO;
 import com.example.eunboard.domain.dto.response.MemberResponseDTO;
 import com.example.eunboard.service.MemberService;
 import com.example.eunboard.service.MemberTimetableService;
+import com.example.eunboard.util.FileUploadUtils;
+import com.example.eunboard.util.MD5Generator;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/member")
 @RestController
@@ -43,12 +43,19 @@ public class MemberAPI {
     @ResponseBody
     @PostMapping("/new")
     public void updateMember(@AuthenticationPrincipal long memberId,
-            @RequestPart("image") MultipartFile multipartFile,
-            @RequestPart("userData") MemberRequestDTO requestDTO) {
+            @RequestPart(required = false, name = "image") MultipartFile multipartFile,
+            @RequestPart(required = false, name = "userData") MemberRequestDTO requestDTO) {
 
-        System.out.println(memberId);
-        System.out.println(requestDTO.toString());
-        System.out.println(multipartFile.getOriginalFilename());
+        // FileUploadUtils.cleanDir("/image/profiles");
+        if (multipartFile != null) {
+            String originName = multipartFile.getOriginalFilename();
+            String ext = originName.substring(originName.lastIndexOf(".") + 1);
+
+            String newFileName = new MD5Generator(originName).toString() + "." + ext;
+            FileUploadUtils.saveFile("/image/profiles/" + memberId, newFileName, multipartFile);
+
+            memberService.updateProfileImage(memberId, newFileName);
+        }
 
         memberTimetableService.saveAll(memberId, requestDTO.getMemberTimeTable());
         memberService.updatMember(memberId, requestDTO);
