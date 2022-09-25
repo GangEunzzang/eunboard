@@ -18,19 +18,19 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class MemberTimetableService {
 
-  private final MemberTimetableRepository memberTimetableRepository;
+    private final MemberTimetableRepository memberTimetableRepository;
 
-  // 티켓 생성
-  public void saveAll(final Long memberId, List<MemberTimetableRequestDTO> timetableList) {
-    memberTimetableRepository
-        .deleteAllInBatch(memberTimetableRepository.findByMember(Member.builder().memberId(memberId).build()));
+    // 티켓 생성
+    public void saveAll(final Long memberId, List<MemberTimetableRequestDTO> timetableList) {
+        memberTimetableRepository
+                .deleteAllInBatch(memberTimetableRepository.findByMember(Member.builder().memberId(memberId).build()));
 
-    List<MemberTimetable> timetableEntities = new ArrayList<>();
-    timetableList.forEach(timeTable -> {
-      timeTable.setMemberId(memberId);
-      timetableEntities.add(MemberTimetableRequestDTO.toEntity(timeTable));
-    });
+        List<MemberTimetable> timetableEntities = new ArrayList<>();
+        timetableList.forEach(timeTable -> {
+            timeTable.setMemberId(memberId);
+            timetableEntities.add(MemberTimetableRequestDTO.toEntity(timeTable));
+        });
 
-    memberTimetableRepository.saveAll(timetableEntities);
-  }
+        memberTimetableRepository.saveAll(timetableEntities);
+    }
 }
