@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     try {
       String token = parseBearerToken(request);
-      log.info("Filter is running...");
+      log.info("JwtAuth Filter, Request URI : {}", request.getRequestURI());
 
       if (null != token && !token.equalsIgnoreCase("null")) {
         Long memberId = tokenProvider.validateAndGetMemberId(token);
