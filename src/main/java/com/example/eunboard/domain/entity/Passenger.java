@@ -2,7 +2,6 @@ package com.example.eunboard.domain.entity;
 
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 
@@ -14,7 +13,7 @@ import javax.persistence.*;
 @ToString
 @Table(name = "passenger")
 @Entity
-public class Passenger extends BaseEntity{
+public class Passenger extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "passenger_id")
@@ -33,6 +32,6 @@ public class Passenger extends BaseEntity{
 
     /** 취소 여부 */
     @Column(name = "is_cancel", columnDefinition = "TINYINT(1)")
-    @ColumnDefault("0")
+    @ColumnDefault("'0'")
     private Integer isCancel;
 }
