@@ -76,8 +76,7 @@ public class Member extends BaseEntity {
     @ToString.Exclude
     private List<MemberTimetable> memberTimeTableList = new ArrayList<>();
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "area", length = 8)
-    private Area area;
+    @Column(name = "area", length = 50)
+    private String area;
 
 }

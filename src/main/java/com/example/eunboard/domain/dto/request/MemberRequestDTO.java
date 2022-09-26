@@ -1,6 +1,5 @@
 package com.example.eunboard.domain.dto.request;
 
-import com.example.eunboard.domain.entity.Area;
 import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.MemberRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -51,7 +50,7 @@ public class MemberRequestDTO {
 
     private boolean isMember;
 
-    private Area area;
+    private String area;
 
     /** 등교일 */
     private List<MemberTimetableRequestDTO> memberTimeTable;

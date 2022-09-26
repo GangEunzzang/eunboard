@@ -1,6 +1,5 @@
 package com.example.eunboard.domain.dto.request;
 
-import com.example.eunboard.domain.entity.Area;
 import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.Ticket;
 import com.example.eunboard.domain.entity.TicketStatus;
@@ -18,11 +17,11 @@ public class TicketRequestDTO {
 
     private Long memberId; // 멤버 일련번호
 
-    private Area startArea;
+    private String startArea;
 
     private TicketStatus status;
 
-    private Area endArea;
+    private String endArea;
 
     private String startDtime;
 

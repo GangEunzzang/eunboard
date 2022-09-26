@@ -1,6 +1,5 @@
 package com.example.eunboard.domain.dto.response;
 
-import com.example.eunboard.domain.entity.Area;
 import com.example.eunboard.domain.entity.Passenger;
 import com.example.eunboard.domain.entity.Ticket;
 import com.example.eunboard.domain.entity.TicketStatus;
@@ -35,9 +34,9 @@ public class TicketResponseDTO {
 
     private String recruitPerson;
 
-    private Area startArea;
+    private String startArea;
 
-    private Area endArea;
+    private String endArea;
 
     private List<Passenger> passengerList = new ArrayList<>();
 

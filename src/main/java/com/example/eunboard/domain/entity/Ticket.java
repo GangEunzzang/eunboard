@@ -59,14 +59,12 @@ public class Ticket extends BaseEntity {
     private String recruitPerson;
 
     /** 출발지 */
-    @Enumerated(EnumType.STRING)
     @Column(name = "start_area", length = 50)
-    private Area startArea;
+    private String startArea;
 
     /** 도착지 */
-    @Enumerated(EnumType.STRING)
     @Column(name = "end_area", length = 50)
-    private Area endArea;
+    private String endArea;
 
     /** 탑승자 연관관계 */
     @OneToMany(mappedBy = "ticket")

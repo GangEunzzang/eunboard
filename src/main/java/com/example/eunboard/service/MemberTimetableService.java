@@ -20,7 +20,6 @@ public class MemberTimetableService {
 
     private final MemberTimetableRepository memberTimetableRepository;
 
-    // 티켓 생성
     public void saveAll(final Long memberId, List<MemberTimetableRequestDTO> timetableList) {
         memberTimetableRepository
                 .deleteAllInBatch(memberTimetableRepository.findByMember(Member.builder().memberId(memberId).build()));
