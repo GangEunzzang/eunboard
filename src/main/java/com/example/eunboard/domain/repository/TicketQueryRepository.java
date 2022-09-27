@@ -36,4 +36,13 @@ public class TicketQueryRepository {
                 .where(ticket.status.eq(TicketStatus.AFTER).not())
                 .fetch();
     }
+
+    public Boolean existTicket(Long memberId) {
+        return queryFactory
+                .selectFrom(ticket)
+                .where(ticket.status.eq(TicketStatus.BEFORE)
+                        .and(ticket.status.eq(TicketStatus.ING))
+                        .and(ticket.member.memberId.eq(memberId)))
+                .fetchOne() != null;
+    }
 }
