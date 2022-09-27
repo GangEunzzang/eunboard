@@ -6,6 +6,7 @@ import com.example.eunboard.domain.dto.request.MemberRequestDTO;
 import com.example.eunboard.domain.dto.response.MemberResponseDTO;
 import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.QuestionBoard;
+import com.example.eunboard.domain.entity.ReportBoard;
 import com.example.eunboard.service.MemberService;
 import com.example.eunboard.service.QuestionBoardService;
 import com.example.eunboard.service.ReportBoardService;
@@ -33,41 +34,33 @@ public class ReportController {
     private final MemberService memberService;
 
     @GetMapping("/ReportBoard")
-    public String createReportForm() {
-        //model.addAttribute("memberForm", new MemberForm());
-        return "/member/new API call : ok";
+    public ResponseEntity<?> selectReportForm(@AuthenticationPrincipal long memberId ) {
+        MemberResponseDTO member= memberService.select(memberId);
+        List<ReportBoard> Boards = reportBoardService.findByEmail(member.getEmail());
+
+        return ResponseEntity.ok().body(Boards);
     }
 
     @PostMapping("/ReportBoard/new")
-    public String createReport(@RequestBody HashMap<String, Object> param) {
-        ReportBoardDTO dto =new ReportBoardDTO();
-        dto.setWriterStudentId(param.get("writerStudentId").toString());
-        dto.setWriterEmail(param.get("writerEmail").toString());
-        dto.setReportStudentId(param.get("reportStudentId").toString());
-        //dto.setTitle(".");
-        dto.setContent(param.get("content").toString());
+    public String updateReport(@AuthenticationPrincipal long memberId,
+                               @RequestBody ReportBoardDTO requestDTO) {
 
-        reportBoardService.createReportBoard(dto);
+        reportBoardService.createReportBoard(requestDTO);
 
-        return "ok";
+        return "report save ok";
     }
 
     @GetMapping("/QuestionBoard")
-    public ResponseEntity<?> createQuestionForm(@AuthenticationPrincipal long memberId ) {
+    public ResponseEntity<?> selectQuestionForm(@AuthenticationPrincipal long memberId ) {
         MemberResponseDTO member= memberService.select(memberId);
         List<QuestionBoard> Boards = questionBoardService.findByEmail(member.getEmail());
+
         return ResponseEntity.ok().body(Boards);
     }
 
     @PostMapping("/QuestionBoard/new")
-    public String createQuestion(@AuthenticationPrincipal long memberId,
+    public String updateQuestion(@AuthenticationPrincipal long memberId,
                                  @RequestBody QuestionBoardDTO requestDTO) {
-        /*QuestionBoardDTO dto =new QuestionBoardDTO();
-        dto.setWriterStudentId(param.get("writerStudentId").toString());
-        dto.setWriterEmail(param.get("writerEmail").toString());
-        //reportDTO.setReportStudentId(".");
-        dto.setTitle(param.get("title").toString());
-        dto.setContent(param.get("content").toString());*/
 
         questionBoardService.createQuestionBoard(requestDTO);
 

@@ -1,13 +1,10 @@
 package com.example.eunboard.service;
 
-import com.example.eunboard.domain.dto.QuestionBoardDTO;
 import com.example.eunboard.domain.dto.ReportBoardDTO;
-import com.example.eunboard.domain.entity.QuestionBoard;
 import com.example.eunboard.domain.entity.ReportBoard;
 import com.example.eunboard.domain.repository.ReportBoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
