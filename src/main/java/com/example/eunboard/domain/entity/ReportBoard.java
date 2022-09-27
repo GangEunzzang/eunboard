@@ -19,6 +19,10 @@ public class ReportBoard extends BaseEntity{
     @Column(name = "report_board_id")
     private Long id;
 
+    /** 멤버 */
+    @Column(name = "member_id")
+    private Long memberId;
+
     /** 신고한 학번 */
     @Column(name = "writer_student_id")
     private String writerStudentId;
