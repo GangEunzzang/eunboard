@@ -72,4 +72,8 @@ public class Ticket extends BaseEntity {
     @ToString.Exclude
     private List<Passenger> passengerList = new ArrayList<>();
 
+
+    public void updateStatus(TicketStatus status) {
+        this.status = status;
+    }
 }

@@ -2,6 +2,7 @@ package com.example.eunboard.controller;
 
 import com.example.eunboard.domain.dto.request.TicketRequestDTO;
 import com.example.eunboard.domain.dto.response.TicketResponseDTO;
+import com.example.eunboard.domain.entity.TicketStatus;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.eunboard.service.TicketService;
@@ -22,7 +23,7 @@ public class TicketAPI {
 
   @PostMapping("/new")
   public void ticketCreate(@RequestBody TicketRequestDTO requestDTO) {
-    ticketService.save(requestDTO);
+    ticketService.ticketSave(requestDTO);
   }
 
   @ResponseBody
@@ -34,12 +35,12 @@ public class TicketAPI {
   @ResponseBody
   @GetMapping("/read/{id}")
   public TicketResponseDTO read(@PathVariable long id) {
-    return ticketService.read(id);
+    return ticketService.ticketRead(id);
   }
 
-  @GetMapping("/delete/{id}")
-  public void delete(@PathVariable long id) {
-    ticketService.delete(id);
+  @GetMapping("/update/{id}")
+  public void delete(@PathVariable long id, TicketStatus status) {
+    ticketService.ticketStatusUpdate(id, status);
   }
   
 }
