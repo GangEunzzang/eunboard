@@ -32,7 +32,7 @@ public class TicketResponseDTO {
 
     private TicketStatus status;
 
-    private String recruitPerson;
+    private Integer recruitPerson;
 
     private String startArea;
 

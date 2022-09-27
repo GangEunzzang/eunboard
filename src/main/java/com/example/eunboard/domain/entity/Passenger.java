@@ -25,10 +25,12 @@ public class Passenger extends BaseEntity {
     @ToString.Exclude
     private Ticket ticket;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     @ToString.Exclude
     private Member member;
+
 
     /** 취소 여부 */
     @Column(name = "is_cancel", columnDefinition = "TINYINT(1)")

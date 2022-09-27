@@ -6,4 +6,5 @@ import lombok.Getter;
 public enum TicketStatus {
 
     CANCEL,BEFORE,ING,AFTER;
+
 }
