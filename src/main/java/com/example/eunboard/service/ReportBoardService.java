@@ -23,7 +23,7 @@ public class ReportBoardService {
     }
 
     //검색
-    public List<ReportBoard> findByEmail(String email) {
-        return reportBoardRepository.findByWriterEmail(email);
+    public List<ReportBoard> findByMemberId(long memberId) {
+        return reportBoardRepository.findByMemberId(memberId);
     }
 }

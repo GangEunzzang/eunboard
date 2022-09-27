@@ -35,8 +35,11 @@ public class ReportController {
 
     @GetMapping("/ReportBoard")
     public ResponseEntity<?> selectReportForm(@AuthenticationPrincipal long memberId ) {
-        MemberResponseDTO member= memberService.select(memberId);
-        List<ReportBoard> Boards = reportBoardService.findByEmail(member.getEmail());
+
+        List<ReportBoard> Boards = reportBoardService.findByMemberId(memberId);
+
+        if(Boards.size() == 0)
+            return ResponseEntity.ok().body("null");
 
         return ResponseEntity.ok().body(Boards);
     }
@@ -45,6 +48,10 @@ public class ReportController {
     public String updateReport(@AuthenticationPrincipal long memberId,
                                @RequestBody ReportBoardDTO requestDTO) {
 
+        MemberResponseDTO member= memberService.select(memberId);
+        requestDTO.setWriterStudentId(member.getStudentNumber());
+        requestDTO.setMemberId(memberId);
+
         reportBoardService.createReportBoard(requestDTO);
 
         return "report save ok";
@@ -52,8 +59,11 @@ public class ReportController {
 
     @GetMapping("/QuestionBoard")
     public ResponseEntity<?> selectQuestionForm(@AuthenticationPrincipal long memberId ) {
-        MemberResponseDTO member= memberService.select(memberId);
-        List<QuestionBoard> Boards = questionBoardService.findByEmail(member.getEmail());
+
+        List<QuestionBoard> Boards = questionBoardService.findByMemberId(memberId);
+
+        if(Boards.size() == 0)
+            return ResponseEntity.ok().body("null");
 
         return ResponseEntity.ok().body(Boards);
     }
@@ -61,6 +71,10 @@ public class ReportController {
     @PostMapping("/QuestionBoard/new")
     public String updateQuestion(@AuthenticationPrincipal long memberId,
                                  @RequestBody QuestionBoardDTO requestDTO) {
+
+        MemberResponseDTO member= memberService.select(memberId);
+        requestDTO.setWriterStudentId(member.getStudentNumber());
+        requestDTO.setMemberId(memberId);
 
         questionBoardService.createQuestionBoard(requestDTO);
 

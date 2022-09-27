@@ -19,6 +19,10 @@ public class QuestionBoard extends BaseEntity{
     @Column(name = "question_board_id")
     private Long id;
 
+    /** 멤버 */
+    @Column(name = "member_id")
+    private Long memberId;
+
     /** 문의학번 */
     @Column(name = "writer_student_id")
     private String writerStudentId;

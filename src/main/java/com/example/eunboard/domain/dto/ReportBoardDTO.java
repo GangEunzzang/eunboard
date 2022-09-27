@@ -1,6 +1,7 @@
 package com.example.eunboard.domain.dto;
 import com.example.eunboard.domain.entity.QuestionBoard;
 import com.example.eunboard.domain.entity.ReportBoard;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 
@@ -13,6 +14,9 @@ import org.modelmapper.ModelMapper;
 public class ReportBoardDTO {
 
     private Long id;
+
+    @JsonIgnore
+    private Long memberId;
 
     private String writerStudentId;
 
