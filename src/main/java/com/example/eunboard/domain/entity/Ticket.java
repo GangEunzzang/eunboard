@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -54,9 +55,8 @@ public class Ticket extends BaseEntity {
     private TicketStatus status;
 
     /** 탑승 인원 */
-    @ColumnDefault("'0'")
-    @Column(name = "recruit_person", columnDefinition = "TINYINT(1)")
-    private String recruitPerson;
+    @Column(name = "recruit_person", length = 2)
+    private Integer recruitPerson;
 
     /** 출발지 */
     @Column(name = "start_area", length = 50)
@@ -72,4 +72,8 @@ public class Ticket extends BaseEntity {
     @ToString.Exclude
     private List<Passenger> passengerList = new ArrayList<>();
 
+
+    public void updateStatus(TicketStatus status) {
+        this.status = status;
+    }
 }

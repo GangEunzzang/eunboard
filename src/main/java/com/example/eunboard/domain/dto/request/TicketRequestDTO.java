@@ -29,7 +29,7 @@ public class TicketRequestDTO {
 
     private String kakaoOpenChatUrl;
 
-    private String recruitPerson;
+    private Integer recruitPerson;
 
     public static Ticket toEntity(TicketRequestDTO dto) {
         return Ticket.builder()

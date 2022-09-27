@@ -32,13 +32,14 @@ public class TicketResponseDTO {
 
     private TicketStatus status;
 
-    private String recruitPerson;
+    private Integer recruitPerson;
 
     private String startArea;
 
     private String endArea;
 
-    private List<Passenger> passengerList = new ArrayList<>();
+//    private List<Passenger> passengerList = new ArrayList<>();
+    private Integer passengerCount;
 
     public static TicketResponseDTO toDTO(Ticket entity) {
         return TicketResponseDTO.builder()
@@ -52,6 +53,7 @@ public class TicketResponseDTO {
                 .recruitPerson(entity.getRecruitPerson())
                 .startArea(entity.getStartArea())
                 .endArea(entity.getEndArea())
+                .passengerCount(entity.getPassengerList().size())
                 .build();
     }
 }
