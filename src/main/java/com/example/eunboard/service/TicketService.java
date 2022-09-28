@@ -36,7 +36,7 @@ public class TicketService {
             throw new CustomException("이미 티켓을 생성하였습니다", ErrorCode.TICKET_IS_EXIST);
         }
 
-        if ( existTicket) {
+        if ( !existTicket) {
             Ticket ticket = TicketRequestDTO.toEntity(requestDTO);
             ticketRepository.save(ticket);
         }
