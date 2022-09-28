@@ -33,6 +33,12 @@ public class TicketAPI {
   }
 
   @ResponseBody
+  @GetMapping("/promise")
+  public TicketResponseDTO promise(Long memberId) {
+      return ticketService.ticketPromise(memberId);
+  }
+
+  @ResponseBody
   @GetMapping("/read/{id}")
   public TicketResponseDTO read(@PathVariable long id) {
     return ticketService.ticketRead(id);
