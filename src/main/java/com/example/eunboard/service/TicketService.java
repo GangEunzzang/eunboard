@@ -2,6 +2,7 @@ package com.example.eunboard.service;
 
 import com.example.eunboard.domain.dto.request.TicketRequestDTO;
 import com.example.eunboard.domain.dto.response.TicketResponseDTO;
+import com.example.eunboard.domain.entity.Member;
 import com.example.eunboard.domain.entity.Ticket;
 import com.example.eunboard.domain.entity.TicketStatus;
 import com.example.eunboard.domain.repository.MemberRepository;
@@ -35,7 +36,7 @@ public class TicketService {
             throw new CustomException("이미 티켓을 생성하였습니다", ErrorCode.TICKET_IS_EXIST);
         }
 
-        if ( existTicket) {
+        if ( !existTicket) {
             Ticket ticket = TicketRequestDTO.toEntity(requestDTO);
             ticketRepository.save(ticket);
         }
@@ -73,4 +74,14 @@ public class TicketService {
     }
 
 
+    public TicketResponseDTO ticketPromise(Long memberId) {
+        Ticket ticket = ticketRepository.findByMember(Member.builder().memberId(memberId).build());
+
+        if (ticket == null) {
+            throw new CustomException("티켓을 찾을 수 없습니다.", ErrorCode.TICKET_NOT_FOUND);
+        }
+        
+        return TicketResponseDTO.toDTO(ticket);
+
+    }
 }

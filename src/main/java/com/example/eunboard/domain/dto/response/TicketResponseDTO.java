@@ -38,6 +38,8 @@ public class TicketResponseDTO {
 
     private String endArea;
 
+    private String memberName;
+
 //    private List<Passenger> passengerList = new ArrayList<>();
     private Integer passengerCount;
 
@@ -54,6 +56,7 @@ public class TicketResponseDTO {
                 .startArea(entity.getStartArea())
                 .endArea(entity.getEndArea())
                 .passengerCount(entity.getPassengerList().size())
+                .memberName(entity.getMember().getMemberName())
                 .build();
     }
 }

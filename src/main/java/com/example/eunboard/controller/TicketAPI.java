@@ -3,6 +3,7 @@ package com.example.eunboard.controller;
 import com.example.eunboard.domain.dto.request.TicketRequestDTO;
 import com.example.eunboard.domain.dto.response.TicketResponseDTO;
 import com.example.eunboard.domain.entity.TicketStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.eunboard.service.TicketService;
@@ -30,6 +31,12 @@ public class TicketAPI {
   @GetMapping("/list")
   public List<TicketResponseDTO> findAll() {
     return ticketService.findAll();
+  }
+
+  @ResponseBody
+  @GetMapping("/promise")
+  public TicketResponseDTO promise(@AuthenticationPrincipal Long memberId) {
+      return ticketService.ticketPromise(memberId);
   }
 
   @ResponseBody
